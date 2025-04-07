@@ -94,6 +94,12 @@ class sistemaV:
             if historia == masc.verHistoria():
                 return masc.eliminarMedicamento(nombre_medicamento)
         return False
+    
+    def existeMedicamento(self, nombre_medicamento):
+        for med in self.__lista_medicamentos:
+            if med.verNombre() == nombre_medicamento:
+                return True
+        return False
 
 def main():
     servicio_hospitalario = sistemaV()
@@ -122,10 +128,14 @@ def main():
                 lista_med=[]
 
                 for i in range(0,nm):
-                    nombre_medicamentos = input("Ingrese el nombre del medicamento: ")
+                    nombre_medicamento = input("Ingrese el nombre del medicamento: ")
+                    if mas.existeMedicamento(nombre_medicamento):
+                        print('Este medicamento ya fue ingresado')
+                        nm = nm + 1
+                        continue
                     dosis =int(input("Ingrese la dosis: "))
                     medicamento = Medicamento()
-                    medicamento.asignarNombre(nombre_medicamentos)
+                    medicamento.asignarNombre(nombre_medicamento)
                     medicamento.asignarDosis(dosis)
                     lista_med.append(medicamento)
 
