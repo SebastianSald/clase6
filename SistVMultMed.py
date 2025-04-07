@@ -100,7 +100,15 @@ class sistemaV:
             if med.verNombre() == nombre_medicamento:
                 return True
         return False
-
+    
+    def solicitarFechaValida(self):
+        while True:
+            fecha = input("Ingrese la fecha de ingreso (DD/MM/AAAA): ")
+            try:
+                datetime.strptime(fecha, "%d/%m/%Y")
+                return fecha
+            except ValueError:
+                print("Formato inválido. Use DD/MM/AAAA.")
 def main():
     servicio_hospitalario = sistemaV()
     # sistma=sistemaV()
@@ -123,7 +131,7 @@ def main():
                 nombre=input("Ingrese el nombre de la mascota: ")
                 tipo=input("Ingrese el tipo de mascota (felino o canino): ")
                 peso=int(input("Ingrese el peso de la mascota: "))
-                fecha=input("Ingrese la fecha de ingreso (dia/mes/año): ")
+                fecha=servicio_hospitalario.solicitarFechaValida(input("Ingrese la fecha de ingreso (dia/mes/año): "))
                 nm=int(input("Ingrese cantidad de medicamentos: "))
                 lista_med=[]
 
