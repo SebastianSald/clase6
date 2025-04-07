@@ -1,3 +1,4 @@
+import datetime
 class Medicamento:
     def __init__(self):
         self.__nombre = "" 
@@ -86,7 +87,13 @@ class sistemaV:
             if historia == masc.verHistoria():
                 self.__lista_mascotas.remove(masc)  #opcion con el pop
                 return True  #eliminado con exito
-        return False 
+        return False
+     
+    def eliminarMedicamento(self, historia, nombre_medicamento):
+        for masc in self.__lista_mascotas:
+            if historia == masc.verHistoria():
+                return masc.eliminarMedicamento(nombre_medicamento)
+        return False
 
 def main():
     servicio_hospitalario = sistemaV()
@@ -165,8 +172,15 @@ def main():
                 print("Mascota eliminada del sistema con exito")
             else:
                 print("No se ha podido eliminar la mascota")
-        
         elif menu==6:
+            q = int(input("Ingrese la historia clínica de la mascota: "))
+            nombre_medicamento = input("Ingrese el nombre del medicamento a eliminar: ")
+            eliminado = servicio_hospitalario.eliminarMedicamentoMascota(q, nombre_medicamento)
+            if eliminado == True:
+                print("Medicamento eliminado correctamente.")
+            else:
+                print("No se encontró el medicamento o la historia clínica.")
+        elif menu==7:
             print("Usted ha salido del sistema de servicio de hospitalización...")
             break
         
